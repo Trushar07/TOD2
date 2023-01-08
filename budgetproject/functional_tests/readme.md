@@ -1,0 +1,1 @@
+Download Web Driver for chrome or browser that you use according your operating system. Make sure that you download the driver according to your current browser version. Replace it with provided chromedriver(This is for linux) in this directory.

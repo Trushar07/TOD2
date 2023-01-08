@@ -78,3 +78,46 @@ class TestViews(TestCase):
             amount = 10,
             category = self.category1
         )
+
+        response = self.client.delete(self.detail_url, json.dumps({
+            'id' : 1
+        }))
+
+        self.assertEquals(response.status_code, 204)
+        self.assertEquals(self.project1.expenses.count(), 0)
+
+
+    def test_project_detail_DELETE_no_data(self):
+        Expense.objects.create(
+            project = self.project1,
+            title = 'expense1',
+            amount = 10,
+            category = self.category1
+        )
+
+        response = self.client.delete(self.detail_url)
+
+        self.assertEquals(response.status_code, 404)
+        self.assertEquals(self.project1.expenses.count(), 1)
+
+
+    def test_project_create_POST(self):
+        url = reverse('add')
+
+        response = self.client.post(url, {
+            'name' : 'project2',
+            'budget': 1000,
+            'categoriesString' : 'StartUp,Equipment'
+        })
+
+        project2 = Project.objects.get(id=2)
+        self.assertEquals(project2.name, 'project2')
+        self.assertEquals(Project.objects.all().count(), 2)
+
+        first_category = Category.objects.get(id=2)
+        self.assertEquals(first_category.project, project2)
+        self.assertEquals(first_category.name, 'StartUp')
+
+        second_category = Category.objects.get(id=3)
+        self.assertEquals(second_category.project, project2)
+        self.assertEquals(second_category.name, 'Equipment')
