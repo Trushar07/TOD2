@@ -31,10 +31,16 @@ class Project(models.Model):
     def get_absolute_url(self):
         return '/' + self.slug
 
+    def __str__(self) -> str:
+        return self.name + "                 " + str(self.budget)
+
 
 class Category(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Expense(models.Model):
@@ -42,6 +48,9 @@ class Expense(models.Model):
     title = models.CharField(max_length=100)
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return self.title + "  " + str(self.amount) + str(self.project)
 
     class Meta:
         ordering = ('-amount',)
