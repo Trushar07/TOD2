@@ -2,9 +2,16 @@ from django.test import SimpleTestCase
 from django.urls import reverse, resolve
 from budget.views import project_detail, project_list, ProjectCreateView
 
+
+"""
+    Assert that appropriate url is routed when particular url is hit.
+"""
+
+
 class TestUrls(SimpleTestCase):
 
     def test_list_url_is_resolved(self):
+
         url = reverse("list")
         #print(resolve(url))
         self.assertEquals(resolve(url).func, project_list)

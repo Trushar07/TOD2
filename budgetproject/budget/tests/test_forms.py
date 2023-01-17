@@ -5,6 +5,10 @@ class TestForms(SimpleTestCase):
 
     def test_expense_form_valid_data(self):
 
+        """
+        Assert that with given data, form is valid.
+        """
+
         form = ExpenseForm(data={
             'title' : 'Initialization',
             'amount' : 1000,
@@ -15,6 +19,10 @@ class TestForms(SimpleTestCase):
 
 
     def test_expense_form_no_data(self):
+
+        """
+        Assert that with no data, form is invalid.
+        """
 
         form = ExpenseForm(data={})
 
