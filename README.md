@@ -1,1 +1,1 @@
-# django-testing-tutorial
+# Budget Management System Test Oriented Development
